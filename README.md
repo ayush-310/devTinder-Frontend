@@ -40,3 +40,12 @@ Body
 - Send/Ignore the user card from the feed
 
 
+# Deployment
+
+- SignUp on AWS
+- Launch Instance
+- chmod 400 <secret>.pem
+- Connected to the machine using SSH command 
+ssh -i "devTinder-secret.pem" ubuntu@ec2-43-204-231-23.ap-south-1.compute.amazonaws.com
+- Install node version
+- Git clone
