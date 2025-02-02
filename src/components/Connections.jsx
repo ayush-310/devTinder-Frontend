@@ -3,7 +3,6 @@ import { BASE_URL } from './../utils/constants';
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addConnection } from "../utils/connectionSlice";
-import UserCard from "./UserCard";
 
 const Connections = () => {
 
