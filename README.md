@@ -49,3 +49,47 @@ Body
 ssh -i "devTinder-secret.pem" ubuntu@ec2-43-204-231-23.ap-south-1.compute.amazonaws.com
 - Install node version
 - Git clone
+
+# Frontend
+   - npm install
+   - npm run build
+   - sudo apt update
+   - sudo apt install nginx
+   - sudo systemctl start nginx
+   - sudo systemctl enable nginx
+   - sudo scp -r dist/* /var/www/html/
+   - Enable port :80 of your instance
+
+# Backend
+   - updated DB password
+   - allowed ec2 instance public IP on mongo server
+   - npm install pm2 -g
+   - pm2 start npm --name "devtinder-backend" -- start
+   - pm2 logs , pm2 flush <name> , pm2 delete <name>
+   - config nginx - /etc/nginx/sites-available/default
+   - restart nginx - sudo systemctl restart nginx
+   - Modify the BASEURL in frontend project to "/api"
+
+# Nginx Config
+
+Frontend - http://43.204.231.23/
+Backend - http://43.204.231.23:3000
+
+Domain name = devtinder.com => 43.204.231.23
+
+Frontend = devtinder.com
+Backend =  devtinder.com:7777 => devtinder.com/api
+
+
+# nginx config :
+
+  server_name 43.204.231.23
+
+  location /api/ {
+        proxy_pass http://localhost:3000/;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
